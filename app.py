@@ -8,12 +8,12 @@ from plotly.subplots import make_subplots
 import numpy as np
 from scipy import stats
 
-# Path to your SQLite database
-DB_PATH = "/home/jtsarmento/HealthData/DBs/summary.db"
+# Constants
+TRAVEL_START = '2024-02-10'
+TRAVEL_END = '2024-08-31'
+DB_PATH = 'summary.db'  # Using relative path for portability
 
 # Define time periods
-TRAVEL_START = '2024-03-11'
-TRAVEL_END = '2024-08-26'
 CURRENT_DATE = '2025-03-28'
 
 def time_to_minutes(time_str):
