@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: idbutils
+Version: 1.1.0
+Summary: Utility library for writing database and internet apps.
+Home-page: https://github.com/tcgoetz/Fit
+Author: Tom Goetz
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.0
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: sqlalchemy
+Requires-Dist: requests
+Requires-Dist: python-dateutil
+Requires-Dist: tqdm
+
+# utilities
+A library of Python utilities useful for database and internet apps.
