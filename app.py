@@ -60,6 +60,19 @@ st.markdown("""
 ### Project Overview
 This dashboard analyzes health metrics collected through my Garmin watch to understand the impact of extended travel on various health indicators. During a significant journey through South America and Europe from March to August 2024, I wanted to quantify how traveling affected my daily health patterns. While many perceive extended travel as a prolonged vacation, the health data reveals a different story - one of significant physical demands and physiological adaptation to constantly changing environments.
 
+### Data Collection Methodology
+The health metrics analyzed in this dashboard were collected using the GarminDB package, an open-source tool that interfaces with Garmin Connect. The data collection process involved:
+
+* **Automated Data Retrieval:** Daily monitoring data was automatically downloaded from Garmin Connect, including all-day heart rate, activity levels, stress measurements, and intensity minutes.
+* **Comprehensive Metrics:** The system extracted and stored detailed data points including:
+    - Sleep patterns and quality
+    - Resting heart rate
+    - Daily step counts
+    - Stress levels (derived from Heart Rate Variability)
+* **Data Processing:** Raw data was processed and stored in a SQLite database, allowing for efficient querying and analysis
+* **Data Integrity:** The system maintains local copies of all downloaded data, ensuring data consistency and allowing for database regeneration without redownloading from Garmin Connect
+
+### Analysis Periods
 The analysis compares key health metrics across three periods:
 - **Before Travel**: Baseline health patterns
 - **During Travel**: Health metrics while exploring new places
@@ -454,7 +467,7 @@ if data is not None:
     
     The HRV-based stress measurements help quantify how various aspects of travel affected physiological response:
 
-    * **Environmental Navigation:** Constant adaptation to unfamiliar surroundings and overcoming language barriers in different countries.
+    * **Navigation:** Constant adaptation to unfamiliar surroundings and overcoming language barriers in different countries.
     
     * **Circadian Disruption:** Regular adjustments to new time zones and changes in daily routines, affecting natural body rhythms.
     
