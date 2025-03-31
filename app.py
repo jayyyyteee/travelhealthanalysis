@@ -9,7 +9,7 @@ import numpy as np
 from scipy import stats
 
 # Constants
-TRAVEL_START = '2024-02-10'
+TRAVEL_START = '2024-03-10'
 TRAVEL_END = '2024-08-31'
 DB_PATH = 'summary.db'  # Using relative path for portability
 
@@ -70,7 +70,7 @@ The health metrics analyzed in this dashboard were collected using the GarminDB 
     - Daily step counts
     - Stress levels (derived from Heart Rate Variability)
 * **Data Processing:** Raw data was processed and stored in a SQLite database, allowing for efficient querying and analysis
-* **Data Integrity:** The system maintains local copies of all downloaded data, ensuring data consistency and allowing for database regeneration without redownloading from Garmin Connect
+
 
 ### Analysis Periods
 The analysis compares key health metrics across three periods:
@@ -93,7 +93,7 @@ sql_query = """
         CAST(stress_avg AS FLOAT) as stress_avg,
         CAST(rhr_avg AS FLOAT) as rhr_avg
     FROM days_summary 
-    WHERE day >= '2024-01-01'
+    WHERE day >= '2023-10-01'
     ORDER BY day
 """
 
@@ -431,9 +431,9 @@ if data is not None:
     
     The combination of varying sleep environments and altitude changes created unique challenges:
 
-    * **Sleep Environment Variability:** Frequent transitions between sleeping arrangements impacted recovery, from overnight buses to hostels. Varying bed sizes and temperatures (from cold mountain nights to humid coastal conditions) posed additional challenges.
+    * **Sleep Environment Variability:** Frequent transitions between sleeping arrangements impacted recovery, from overnight buses to unfomfortable accomodations. Varying bed sizes and temperatures (from cold mountain nights to humid coastal conditions) posed additional challenges.
     
-    * **Altitude Adaptation:** Regular exposure to significant elevation changes in regions like the Andes Mountains (11,152 ft) and Italian Dolomites (10,000+ ft) required continuous cardiovascular adaptation. Overnight transportation and early departures further disrupted natural sleep cycles, particularly during multi-day treks.
+    * **Altitude Adaptation:** Regular exposure to significant elevation changes in regions like the Andes Mountains required continuous cardiovascular adaptation. Overnight transportation and early departures further disrupted natural sleep cycles, particularly during multi-day treks.
 
     **Physical Demands**
     
@@ -457,9 +457,9 @@ if data is not None:
     stress_home_avg = period_stats.loc['After Travel', 'stress_avg']
     stress_change = ((stress_travel_avg - stress_home_avg) / stress_home_avg * 100)
     
-    st.write(f"- Average stress level was {stress_travel_avg:.1f} during travel and {stress_home_avg:.1f} after travel")
-    st.write(f"- This represents a {abs(stress_change):.1f}% {'increase' if stress_change > 0 else 'decrease'} in stress during travel")
-    st.write("- Peak stress levels during travel coincided with specific events like food poisoning and challenging travel days")
+    st.write(f"- Average stress level was {stress_travel_avg:.1f} during travel and {stress_home_avg:.1f} after travel.")
+    st.write(f"- This represents a {abs(stress_change):.1f}% {'increase' if stress_change > 0 else 'decrease'} in stress during travel.")
+    st.write("- Peak stress levels during travel coincided with specific events like food poisoning and challenging travel days.")
     st.write("- Despite higher average stress, there were also periods of remarkably low stress during travel, particularly during extended stays in single locations")
 
     st.markdown("""
@@ -484,27 +484,34 @@ if data is not None:
     These factors combined to create a dynamic stress profile throughout the journey, with the body constantly working to maintain homeostasis in changing conditions.
     """)
     
-    
-    
+    # Add conclusion section
+    st.markdown("""
+    ### Conclusion: The True Nature of Extended Travel
+
+    While spending six months traversing South America and Europe was an incredibly rewarding and transformative experience, the data presented in this analysis reveals the physical and mental demands of long-term travel. The metrics paint a clear picture of the body's response to constant movement, adaptation, and stress:
+
+    For those contemplating extended travel, this analysis serves as both an inspiration and a reality check. While the experiences are invaluable and life-changing, it's crucial to understand that long-term travel is not a vacation – it's an endeavor that requires physical preparation, mental resilience, and careful attention to your body's signals. The rewards of exploring diverse cultures, witnessing breathtaking landscapes, and pushing personal boundaries come with a measurable impact on your physiology that should be respected and prepared for.
+    """)
+
     st.markdown("""
     ### Study Limitations
-    
+
     **Statistical Considerations**
-    
+
     While this analysis provides valuable insights into health changes during travel, there are important statistical limitations to consider:
-    
+
     * **Variance Heterogeneity:** The use of pooled standard error in our statistical tests assumes similar variances between travel and post-travel periods. However, our data shows notably different ranges and variability between these periods, particularly in:
         - Daily steps (wider range during travel due to alternating intense hiking days and rest days)
         - Heart rate measurements (greater variability during travel due to altitude changes and varying activity intensities)
         - Stress levels (more extreme fluctuations during travel)
-    
+
     * **Sample Independence:** The sequential nature of the data (continuous daily measurements) may violate the assumption of independent samples, as health metrics often show temporal correlations.
-    
+
     * **External Factors:** The analysis cannot fully account for all variables affecting health metrics, such as:
         - Seasonal changes between travel and post-travel periods
         - Different environmental conditions
         - Varying measurement conditions (e.g., device placement, daily wear time)
-    
+
     These limitations suggest that the statistical significance values should be interpreted cautiously, with emphasis on the practical significance of the observed changes rather than purely statistical measures.
     """)
 
