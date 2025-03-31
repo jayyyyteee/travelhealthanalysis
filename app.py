@@ -16,17 +16,6 @@ DB_PATH = 'summary.db'  # Using relative path for portability
 # Define time periods
 CURRENT_DATE = '2025-03-28'
 
-def time_to_minutes(time_str):
-    """Convert time string in format HH:MM:SS to minutes"""
-    try:
-        if pd.isna(time_str):
-            return 0
-        # Split the time string and handle potential microseconds
-        time_parts = time_str.split('.')[0]
-        hours, minutes, seconds = map(int, time_parts.split(':'))
-        return hours * 60 + minutes + seconds / 60
-    except:
-        return 0
 
 @st.cache_resource
 def get_connection():
@@ -322,7 +311,7 @@ if data is not None:
         # Display detailed statistics
         st.write("**Detailed Statistics by Period:**")
         
-        # Format the statistics table
+        # Format the step numbers that need comma formatting
         stats_df = period_detailed_stats.copy()
         if metric == 'steps':
             stats_df['mean'] = stats_df['mean'].apply(lambda x: f"{x:,.0f}")
